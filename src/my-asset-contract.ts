@@ -37,6 +37,8 @@ export class MyAssetContract extends Contract {
         // The putState method changes the current value of a business object 
         // with the key myAssetId to the value buffer. 
         await ctx.stub.putState(myAssetId, buffer);
+        const eventPayload: Buffer = Buffer.from(`Created asset ${myAssetId} (${value})`);
+        ctx.stub.setEvent('myEvent', eventPayload);
     }
 
     @Transaction(false)
